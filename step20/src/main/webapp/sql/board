@@ -1,0 +1,36 @@
+CREATE TABLE board(
+    seq NUMBER not NULL, 
+    id VARCHAR2(20) not NULL,
+    name VARCHAR2(40) not NULL,
+    subject VARCHAR2(225) not NULL,
+    content VARCHAR2(4000) not NULL,
+    hit NUMBER DEFAULT 0,
+    logtime DATE DEFAULT sysdate
+);
+--테이블 삭제
+DROP TABLE board PURGE;
+--테이블 확인
+SELECT *FROM tab;
+    
+--시퀀스 객체 생성
+CREATE SEQUENCE seq_board NOCACHE NOCYCLE;
+--시퀀스 객체 삭제
+DROP SEQUENCE seq_board;
+--데이터 저장
+INSERT INTO board VALUES(seq_board.nextval,'num1','홍길동',
+'내일은','웃으리...',0,sysdate);
+--데이터 검색
+SELECT*FROM board;
+SELECT*FROM board where seq=2;
+--데이터 갯수 조회
+SELECT COUNT(*)as cnt FROM board;
+
+--데이터 수정
+UPDATE board set subject='오늘은' where seq=1;
+UPDATE board set subject='오늘도', content='열심히 살았다...' where seq=19;
+--조회수 증가 시키기
+update board set hit = hit+1 WHERE seq=2;
+--데이터 삭제
+DELETE board WHERE seq=1;
+--데이터 저장
+COMMIT;
